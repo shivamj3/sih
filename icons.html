@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Page</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <style>
+        /* Same CSS as provided by you */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Oswald", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to top left, #2a2b5b, white);
+        }
+
+        .main-div {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .header {
+            height: 25vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .logo-icon {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            animation: bounceIn 1.5s ease-in-out;
+        }
+
+        .content {
+            height: 75vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        .box {
+            width: 249px;
+            height: 249px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #333;
+            border-radius: 50px;
+            overflow: hidden;
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            animation: zoomIn 1.5s ease-in-out;
+        }
+
+        .box:hover {
+            transform: scale(1.1);
+        }
+
+        .icon-image {
+            width: 266px;
+            height: 100%;
+            object-fit: contain;
+            animation: slideIn 1.5s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            .box {
+                width: 200px;
+                height: 200px;
+            }
+
+            .logo-icon {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-div">
+        <!-- Header Section -->
+        <header class="header">
+            <img src="https://imgs.search.brave.com/lhxiBX3d0gSsSf4AZX8ZW32IXK2Ve6nQoobtmHNydLE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2lraWEubm9j/b29raWUubmV0L2xv/Z29wZWRpYS9pbWFn/ZXMvMS8xNi9NYWRo/eWFfUHJhZGVzaF9Q/b2xpY2VfTG9nby5w/bmcvcmV2aXNpb24v/bGF0ZXN0L3NjYWxl/LXRvLXdpZHRoLWRv/d24vMjQwP2NiPTIw/MjAwMzMwMDcxOTU0" alt="Logo" class="logo-icon">
+        </header>
+
+        <!-- Content Section -->
+        <div class="content">
+            <div class="box">
+              <a href="{% url 'type' %}">
+                <img src="https://www.shutterstock.com/image-vector/keyboard-typing-icon-vector-illustration-260nw-1547805611.jpg" alt="Upload Image Icon" class="icon-image">
+            </a>
+            </div>
+            <div class="box">
+              <a href="{% url 'voice' %}">
+                <img src="https://i.pinimg.com/736x/a7/dc/67/a7dc6700ac2feee0a9cd8c8f1c619732.jpg" alt="Upload Image Icon" class="icon-image">
+            </a>
+            </div>
+            <div class="box">
+              <!-- Redirect Icon 3 to the upload image page -->
+              <a href="{% url 'upload_image' %}">
+                  <img src="https://png.pngtree.com/png-vector/20190508/ourmid/pngtree-gallery-vector-icon-png-image_1028015.jpg" alt="Upload Image Icon" class="icon-image">
+              </a>
+          </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIReBOT</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Faculty+Glyphic&family=Fredoka:wght@300..700&family=Oswald:wght@200..700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Oswald", sans-serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            height: 30vh;
+            width: 100vw;
+            background-color: rgba(8, 37, 79, 1);
+            color: white;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            padding: 0 20px;
+            animation: fadeInHeader 1s ease-in-out;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-right: 10px;
+            font-family: 'Bebas Neue', sans-serif;
+            animation: fadeInText 1.5s ease-in-out;
+        }
+
+        .logo {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            animation: fadeInLogo 1s ease-in-out;
+        }
+
+        .main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+            background-color: rgba(8, 37, 79, 1);
+            animation: fadeInMain 1s ease-in-out;
+        }
+
+        .main h3 {
+            font-size: 2rem;
+            color: whitesmoke;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            animation: fadeInText 1s ease-in-out;
+        }
+
+        .main img {
+            height: 150px;
+        }
+
+        .audio-button {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: whitesmoke;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+            animation: fadeInButton 1.5s ease-in-out;
+        }
+
+        .audio-button:hover {
+            background-color: #e04343;
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes fadeInHeader {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInLogo {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInButton {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInMain {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                height: auto;
+                padding: 20px;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                margin-right: 0;
+            }
+
+            .logo {
+                width: 120px;
+                height: 120px;
+            }
+
+            .audio-button {
+                width: 150px;
+                height: 150px;
+                font-size: 1.5rem;
+            }
+
+            .main h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+
+            .audio-button {
+                width: 120px;
+                height: 120px;
+                font-size: 1.2rem;
+            }
+
+            .main h3 {
+                font-size: 1.2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <img src="https://imgs.search.brave.com/lhxiBX3d0gSsSf4AZX8ZW32IXK2Ve6nQoobtmHNydLE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2lraWEubm9j/b29raWUubmV0L2xv/Z29wZWRpYS9pbWFn/ZXMvMS8xNi9NYWRo/eWFfUHJhZGVzaF9Q/b2xpY2VfTG9nby5w/bmcvcmV2aXNpb24v/bGF0ZXN0L3NjYWxl/LXRvLXdpZHRoLWRv/d24vMjQwP2NiPTIw/MjAwMzMwMDcxOTU0" alt="Logo" class="logo">
+                <h1>FIReBOT</h1>
+            </div>
+        </header>
+        <div class="main">
+            <button class="audio-button" id="record-button" onclick="window.location.href='https://colab.research.google.com/drive/1Ihhm_icPu63ykAAyNbhQIRdoIdr-Sv8s?usp=sharing'">Record</button>
+
+                <img src="audio.png" alt="">
+            </button>
+            <h3>Listening...</h3>
+        </div>
+    </div>
+    <script>
+        const recordButton = document.getElementById('record-button');
+
+        let mediaRecorder;
+        let audioChunks = [];
+
+        // Request permission and initialize media recorder
+        async function initAudioRecorder() {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+
+            mediaRecorder.ondataavailable = event => {
+                audioChunks.push(event.data);
+            };
+
+            mediaRecorder.onstop = () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                audioChunks = [];
+                sendAudioToBackend(audioBlob);
+            };
+        }
+
+        // Start or stop recording when the button is clicked
+        recordButton.addEventListener('click', () => {
+            if (mediaRecorder && mediaRecorder.state === 'recording') {
+                mediaRecorder.stop();
+                recordButton.textContent = '🎤';
+            } else if (mediaRecorder) {
+                mediaRecorder.start();
+                recordButton.textContent = '⏹';
+            } else {
+                alert('Audio recorder not initialized.');
+            }
+        });
+
+        // Send recorded audio to backend
+        function sendAudioToBackend(audioBlob) {
+            const formData = new FormData();
+            formData.append('audio', audioBlob, 'recording.wav');
+
+            fetch('/upload-audio', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Audio uploaded successfully:', data);
+            })
+            .catch(error => {
+                console.error('Error uploading audio:', error);
+            });
+        }
+
+        // Initialize recorder on page load
+        window.onload = initAudioRecorder;
+    </script>
+</body>
+</html>

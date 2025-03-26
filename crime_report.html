@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIReBOT Dynamic Layout</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Oswald", sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .left-div {
+      width: 20vw;
+      height: 100vh;
+      background-color: rgba(8, 37, 79, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      animation: fadeInLeft 1s ease-in-out;
+    }
+
+    .left-div img {
+      width: 150px;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      animation: bounceIn 1.5s ease-out;
+    }
+
+    .dropdown {
+      width: 80%;
+      margin: 10px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      animation: slideIn 1s ease-in-out;
+    }
+
+    .dropdown select {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 50px;
+    }
+
+    .right-div {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: rgba(254, 255, 239, 1);
+      animation: fadeInRight 1s ease-in-out;
+    }
+
+    .top-header {
+      height: 15vh;
+      background-color: rgba(254, 255, 239, 1);
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      font-weight: bold;
+      animation: fadeInDown 1s ease-in-out;
+    }
+
+    .bottom-content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #chart-container canvas {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes bounceIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .left-div {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+      }
+
+      .dropdown {
+        flex-direction: row;
+        gap: 10px;
+      }
+
+      .right-div {
+        height: auto;
+        padding: 20px;
+      }
+
+      .top-header {
+        font-size: 1.5rem;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="left-div">
+    <img src="https://imgs.search.brave.com/lhxiBX3d0gSsSf4AZX8ZW32IXK2Ve6nQoobtmHNydLE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2lraWEubm9j/b29raWUubmV0L2xv/Z29wZWRpYS9pbWFn/ZXMvMS8xNi9NYWRo/eWFfUHJhZGVzaF9Q/b2xpY2VfTG9nby5w/bmcvcmV2aXNpb24v/bGF0ZXN0L3NjYWxl/LXRvLXdpZHRoLWRv/d24vMjQwP2NiPTIw/MjAwMzMwMDcxOTU0" alt="Icon">
+    <div class="dropdown">
+      <select id="data-selector-city">
+        <option value="Delhi">Delhi</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Chennai">Chennai</option>
+        <option value="Kolkata">Kolkata</option>
+      </select>
+      <select id="data-selector-crime">
+        <option value="robbery">Robbery</option>
+        <option value="murder">Murder</option>
+        <option value="theft">Theft</option>
+        <option value="assault">Assault</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="right-div">
+    <div class="top-header">
+      <h1>FIReBOT</h1>
+    </div>
+    <div class="bottom-content" id="chart-container">
+      <!-- Graph will be dynamically generated here -->
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.createElement('canvas');
+    document.getElementById('chart-container').appendChild(ctx);
+
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May'],
+        datasets: [{
+          label: 'Robbery (Delhi)',
+          data: [12, 19, 3, 5, 2],
+          backgroundColor: 'rgba(75, 192, 192, 0.6)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          legend: {
+            display: true
+          }
+        }
+      }
+    });
+
+    function updateChart(city, crime) {
+      let labels = ['January', 'February', 'March', 'April', 'May'];
+      let data = [];
+
+      if (city === 'Delhi') {
+        if (crime === 'robbery') {
+          data = [12, 19, 3, 5, 2];
+        } else if (crime === 'murder') {
+          data = [2, 3, 5, 8, 6];
+        } else if (crime === 'theft') {
+          data = [5, 7, 9, 6, 4];
+        } else if (crime === 'assault') {
+          data = [8, 9, 2, 3, 5];
+        }
+      } else if (city === 'Mumbai') {
+        if (crime === 'robbery') {
+          data = [7, 9, 5, 3, 4];
+        } else if (crime === 'murder') {
+          data = [4, 3, 2, 5, 7];
+        } else if (crime === 'theft') {
+          data = [6, 4, 2, 3, 9];
+        } else if (crime === 'assault') {
+          data = [3, 4, 7, 8, 5];
+        }
+      }
+
+      chart.data.labels = labels;
+      chart.data.datasets[0].data = data;
+      chart.data.datasets[0].label = `${crime.charAt(0).toUpperCase() + crime.slice(1)} (${city})`;
+      chart.update();
+    }
+
+    document.getElementById('data-selector-city').addEventListener('change', (e) => {
+      const city = e.target.value;
+      const crime = document.getElementById('data-selector-crime').value;
+      updateChart(city, crime);
+    });
+
+    document.getElementById('data-selector-crime').addEventListener('change', (e) => {
+      const crime = e.target.value;
+      const city = document.getElementById('data-selector-city').value;
+      updateChart(city, crime);
+    });
+  </script>
+</body>
+</html>

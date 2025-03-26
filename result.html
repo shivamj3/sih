@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="{% if lang == 'hi' %}hi{% else %}en{% endif %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if lang == 'hi' %}परिणाम पृष्ठ{% else %}Result Page{% endif %}</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Oswald", sans-serif;
+        }
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #002c5f, #e7f4fc);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        .main-div {
+            height: 90%;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            animation: popIn 1.5s ease-out;
+        }
+        .top-div {
+            height: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #08254f;
+            position: relative;
+        }
+        .top-div h1 {
+            font-size: 2rem;
+            color: white;
+            animation: fadeInText 1.5s ease-in-out;
+        }
+        .toggle-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            background-color: white;
+            color: #08254f;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .toggle-button:hover {
+            background-color: #08254f;
+            color: white;
+        }
+        .bottom-div {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .search-bar input {
+            width: 90%;
+            max-width: 400px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .search-bar button {
+            margin-left: 10px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border: none;
+            background-color: #08254f;
+            color: white;
+            border-radius: 5px;
+        }
+        @keyframes popIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+                letter-spacing: 5px;
+            }
+            to {
+                opacity: 1;
+                letter-spacing: 1px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-div">
+        <div class="top-div">
+            <h1>{% if lang == 'hi' %}परीक्षण सहायता{% else %}Investigation Help{% endif %}</h1>
+            <a href="{% url 'toggle_language' %}" class="toggle-button">
+                {% if lang == 'hi' %}Switch to English{% else %}Switch to Hindi{% endif %}
+            </a>
+        </div>
+        <div class="bottom-div">
+            <div id="result-section">
+                {% if query %}
+                    {% if lang == 'hi' %}
+                        आपने दर्ज किया: {{ query }}
+                    {% else %}
+                        You entered: {{ query }}
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIR eBOT - Signup</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: "Oswald", sans-serif;
+      background: linear-gradient(to bottom, #08254e, #dce7f0);
+      color: white;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #dce7f0; /* Light Blue */
+      color: #08254e;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.8rem;
+      animation: slideInDown 1s ease-in-out;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    .state-dropdown input {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 0 auto 20px auto;
+      border: 1px solid #08254e;
+      border-radius: 5px;
+      font-size: 16px;
+      box-sizing: border-box;
+      animation: zoomIn 0.8s ease;
+    }
+
+    .state-dropdown {
+      position: relative;
+      width: 100%;
+    }
+
+    .state-options {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      max-height: 150px;
+      overflow-y: auto;
+      background: white;
+      color: #08254e;
+      border: 1px solid #08254e;
+      z-index: 10;
+    }
+
+    .state-options div {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .state-options div:hover {
+      background-color: #f0f0f0;
+    }
+
+    input[type="submit"] {
+      width: calc(100% - 20px);
+      padding: 12px;
+      background-color: #08254e;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      margin: 0 auto;
+      animation: bounceIn 1s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #061d3b;
+      transform: scale(1.05);
+    }
+
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-bottom: 20px;
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .toggle-btn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      padding: 10px 15px;
+      background-color: #08254e;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .toggle-btn:hover {
+      background-color: #061d3b;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideInDown {
+      from {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes bounceIn {
+      from {
+        transform: scale(0.8);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+      .container {
+        padding: 15px;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      input[type="submit"] {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-btn" id="toggle-btn">Switch to Hindi</button>
+  <div class="container">
+    <h2 id="form-title">Signup for FIR eBOT</h2>
+    <form id="signup-form">
+      <label for="fullname" id="label-fullname">Full Name</label>
+      <input type="text" id="fullname" placeholder="Enter your full name" required>
+
+      <label for="batch-number" id="label-batch-number">Batch Number</label>
+      <input type="text" id="batch-number" placeholder="Enter your batch number" required>
+
+      <label for="email" id="label-email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email address" required>
+
+      <label for="phone" id="label-phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
+
+      <label for="state" id="label-state">State</label>
+      <div class="state-dropdown">
+        <input type="text" id="state" placeholder="Type your state" autocomplete="off" required>
+        <div class="state-options" id="state-options"></div>
+      </div>
+
+      <label for="password" id="label-password">Password</label>
+      <input type="password" id="password" placeholder="Create your password" required>
+
+      <label for="confirm-password" id="label-confirm-password">Confirm Password</label>
+      <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+
+      <div class="error-message" id="error-message">Passwords do not match!</div>
+
+      <input type="submit" value="Signup">
+    </form>
+  </div>
+
+  <script>
+    const states = [
+      "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", 
+      "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala",
+      "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland",
+      "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
+      "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", 
+      "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep", "Delhi", 
+      "Puducherry", "Jammu and Kashmir", "Ladakh"
+    ];
+
+    const translations = {
+      "Signup for FIR eBOT": "FIR eBOT के लिए साइन अप करें",
+      "Full Name": "पूरा नाम",
+      "Batch Number": "बैच नंबर",
+      "Email": "ईमेल",
+      "Phone Number": "फोन नंबर",
+      "State": "राज्य",
+      "Password": "पासवर्ड",
+      "Confirm Password": "पासवर्ड की पुष्टि करें",
+      "Passwords do not match!": "पासवर्ड मेल नहीं खाते!"
+    };
+
+    const toggleBtn = document.getElementById("toggle-btn");
+    let isHindi = false;
+
+    toggleBtn.addEventListener("click", () => {
+      isHindi = !isHindi;
+      toggleBtn.textContent = isHindi ? "Switch to English" : "Switch to Hindi";
+
+      document.getElementById("form-title").textContent = 
+        isHindi ? translations["Signup for FIR eBOT"] : "Signup for FIR eBOT";
+
+      document.getElementById("label-fullname").textContent = 
+        isHindi ? translations["Full Name"] : "Full Name";
+      
+      document.getElementById("label-batch-number").textContent = 
+        isHindi ? translations["Batch Number"] : "Batch Number";
+
+      document.getElementById("label-email").textContent = 
+        isHindi ? translations["Email"] : "Email";
+
+      document.getElementById("label-phone").textContent = 
+        isHindi ? translations["Phone Number"] : "Phone Number";
+
+      document.getElementById("label-state").textContent = 
+        isHindi ? translations["State"] : "State";
+
+      document.getElementById("label-password").textContent = 
+        isHindi ? translations["Password"] : "Password";
+
+      document.getElementById("label-confirm-password").textContent = 
+        isHindi ? translations["Confirm Password"] : "Confirm Password";
+
+      document.getElementById("error-message").textContent = 
+        isHindi ? translations["Passwords do not match!"] : "Passwords do not match!";
+    });
+
+    const stateInput = document.getElementById("state");
+    const stateOptions = document.getElementById("state-options");
+
+    stateInput.addEventListener("input", () => {
+      const query = stateInput.value.toLowerCase();
+      stateOptions.innerHTML = "";
+      if (query) {
+        const filteredStates = states.filter(state =>
+          state.toLowerCase().includes(query)
+        );
+        filteredStates.forEach(state => {
+          const div = document.createElement("div");
+          div.textContent = state;
+          div.addEventListener("click", () => {
+            stateInput.value = state;
+            stateOptions.innerHTML = "";
+            stateOptions.style.display = "none";
+          });
+          stateOptions.appendChild(div);
+        });
+        stateOptions.style.display = "block";
+      } else {
+        stateOptions.style.display = "none";
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!stateOptions.contains(e.target) && e.target !== stateInput) {
+        stateOptions.style.display = "none";
+      }
+    });
+
+    const signupForm = document.getElementById("signup-form");
+    const errorMessage = document.getElementById("error-message");
+
+    signupForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirm-password").value;
+
+      if (password !== confirmPassword) {
+        errorMessage.style.display = "block";
+      } else {
+        errorMessage.style.display = "none";
+        alert(isHindi ? "साइनअप सफल हुआ!" : "Signup successful!");
+        signupForm.reset();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload Page</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            width: 100vw;
+            background-color: rgba(254, 255, 239, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            border-radius: 50%;
+            height: 80px;
+            width: 80px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .header {
+            height: 30vh;
+            width: 100vw;
+            background-color: rgba(8, 37, 79, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            animation: slideInFromTop 1.5s ease-in-out;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-top: 10px;
+            animation: bounceIn 2s ease-in-out;
+        }
+
+        .toggle-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            background-color: white;
+            color: rgba(8, 37, 79, 1);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .toggle-button:hover {
+            background-color: rgba(8, 37, 79, 1);
+            color: white;
+        }
+
+        .upload-section {
+            height: 70vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .upload-container {
+            position: relative;
+            height: 350px;
+            width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border: 2px dashed #000;
+            border-radius: 10px;
+            animation: zoomIn 1.5s ease-in-out;
+        }
+
+        .upload-icon {
+            height: 250px;
+            width: 250px;
+            background: url('data:image/png;base64,...') no-repeat center center;
+            background-size: contain;
+            margin-bottom: 10px;
+            border: 1px dashed #ddd;
+            border-radius: 5px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .upload-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .upload-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #2a2b5b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .upload-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInFromTop {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounceIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .upload-container {
+                height: 300px;
+                width: 90%;
+            }
+
+            .upload-icon {
+                height: 200px;
+                width: 200px;
+            }
+
+            .upload-button {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="header">
+            <img class="logo" src="https://imgs.search.brave.com/lhxiBX3d0gSsSf4AZX8ZW32IXK2Ve6nQoobtmHNydLE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2lraWEubm9j/b29raWUubmV0L2xv/Z29wZWRpYS9pbWFn/ZXMvMS8xNi9NYWRo/eWFfUHJhZGVzaF9Q/b2xpY2VfTG9nby5w/bmcvcmV2aXNpb24v/bGF0ZXN0L3NjYWxl/LXRvLXdpZHRoLWRv/d24vMjQwP2NiPTIw/MjAwMzMwMDcxOTU0" alt="FIReBOT Logo">
+            <h1>FIReBOT</h1>
+            <button class="toggle-button" id="toggleLang">Switch to Hindi</button>
+        </div>
+
+        <div class="upload-section">
+            <div class="upload-container">
+                <div class="upload-icon" id="uploadPreview">
+                    <img src="https://res.cloudinary.com/dqgw1wo8j/image/upload/v1733743920/tffd7pmvomsmmkljbkna.png" alt="Upload image">
+                </div>
+                <input type="file" id="uploadInput" class="file-input" accept="image/*" onchange="previewImage(event)">
+                <button class="upload-button" onclick="window.location.href='https://colab.research.google.com/drive/1tPyy3jD9Lfc49xEQo2NdUqYZtAacJyf6?usp=sharing'">Upload Image</button>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('uploadPreview');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.style.backgroundImage = `url('${e.target.result}')`;
+                    preview.style.backgroundSize = 'cover';
+                    preview.style.backgroundPosition = 'center';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        const toggleButton = document.getElementById("toggleLang");
+        toggleButton.addEventListener("click", () => {
+            const currentLang = document.documentElement.lang;
+            if (currentLang === "en") {
+                document.documentElement.lang = "hi";
+                toggleButton.textContent = "Switch to English";
+                document.querySelector(".header h1").textContent = "एफआईआरबॉट";
+            } else {
+                document.documentElement.lang = "en";
+                toggleButton.textContent = "Switch to Hindi";
+                document.querySelector(".header h1").textContent = "FIReBOT";
+            }
+        });
+    </script>
+</body>
+</html>

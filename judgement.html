@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Judgement</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        font-family: "Oswald", sans-serif;
+        overflow-x: hidden;
+      }
+
+      .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(to bottom, #2b2a5b, #e1e1e1);
+        animation: fadeInBg 2s ease-in-out;
+      }
+
+      .inner-div {
+        width: 90%;
+        max-width: 1200px;
+        height: 90vh;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        animation: slideIn 1s ease-in-out;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background: #f5f5f5;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        animation: fadeInDown 1s ease-in-out;
+      }
+
+      .logo img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        animation: zoomIn 1.5s ease-in-out;
+      }
+
+      .judgement-section h1 {
+        font-size: 2rem;
+        color: #2b2a5b;
+        text-transform: uppercase;
+        animation: bounceIn 1.5s ease-in-out;
+      }
+
+      .search-bar {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+        animation: fadeInUp 1.5s ease-in-out;
+      }
+
+      .search-bar input {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        width: 250px;
+        margin-right: 10px;
+        font-size: 1rem;
+      }
+
+      .search-bar button {
+        padding: 10px;
+        border-radius: 50%;
+        border: 2px solid #2b2a5b;
+        background-color: #2b2a5b;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .search-bar button:hover {
+        background-color: #45a049;
+        transform: scale(1.1);
+      }
+
+      .search-results {
+        margin-top: 20px;
+        padding: 20px;
+        background: #ffffff;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 1.5s ease-in-out;
+      }
+
+      .search-results h2 {
+        font-size: 1.5rem;
+        color: #333;
+        text-align: center;
+      }
+
+      @keyframes fadeInBg {
+        from {
+          opacity: 0;
+          transform: scale(1.1);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateY(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInDown {
+        from {
+          transform: translateY(-20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes zoomIn {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      @keyframes bounceIn {
+        from {
+          transform: scale(0.9);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header,
+        .search-bar input,
+        .search-results h2 {
+          font-size: 1rem;
+        }
+        .search-bar input {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="inner-div">
+        <header class="header">
+          <div class="logo">
+            <img src="https://imgs.search.brave.com/lhxiBX3d0gSsSf4AZX8ZW32IXK2Ve6nQoobtmHNydLE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2lraWEubm9j/b29raWUubmV0L2xv/Z29wZWRpYS9pbWFn/ZXMvMS8xNi9NYWRo/eWFfUHJhZGVzaF9Q/b2xpY2VfTG9nby5w/bmcvcmV2aXNpb24v/bGF0ZXN0L3NjYWxl/LXRvLXdpZHRoLWRv/d24vMjQwP2NiPTIw/MjAwMzMwMDcxOTU0" alt="Logo" />
+          </div>
+          <div class="judgement-section">
+            <h1>Previous Cases</h1>
+          </div>
+          <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search..." />
+            <button id="searchBtn" onclick="searchJudgement()">🔍</button>
+          </div>
+        </header>
+        <div class="search-results">
+          {% if search_result %}
+          <h2>{{ search_result }}</h2>
+          {% else %}
+          <h2>No results found</h2>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

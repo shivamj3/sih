@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - FIReBot</title>
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9; /* Light background */
+      color: #08254e; /* Dark blue */
+    }
+
+    /* Header Section */
+    .header {
+      background-color: #08254f; /* Dark blue */
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header h1 {
+      font-size: 48px;
+      margin: 0;
+      animation: slideIn 2s ease-out;
+    }
+
+    .header p {
+      font-size: 20px;
+      margin: 10px 0 0;
+      opacity: 0;
+      animation: fadeIn 2.5s ease-in forwards;
+    }
+
+    .header img {
+      width: 100px;
+    }
+
+    /* Wave Effect */
+    .wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50px;
+      background: url('https://svgshare.com/i/kT3.svg') repeat-x;
+      animation: wave 8s linear infinite;
+    }
+
+    @keyframes wave {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-1600px); }
+    }
+
+    @keyframes slideIn {
+      0% { transform: translateY(-50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* About Section */
+    .about-section {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .about-section h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #08254e;
+    }
+
+    .about-section p {
+      font-size: 18px;
+      color: #4a4a4a;
+      line-height: 1.8;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Features Section */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 50px 20px;
+      justify-items: center;
+    }
+
+    .feature-card {
+      background-color: #e3f2fd;
+      border: 2px solid #ffd700;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature-card img {
+      width: 60px;
+      margin-bottom: 15px;
+    }
+
+    .feature-card h3 {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+
+    .feature-card p {
+      font-size: 16px;
+      color: #4a4a4a;
+    }
+
+    /* Call-to-Action Section */
+    .cta {
+      background-color: #08254f;
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .cta button {
+      background-color: #ffd700;
+      color: #08254e;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .cta button:hover {
+      background-color: #e6c200;
+      transform: scale(1.1);
+    }
+
+    /* Footer Section */
+    .footer {
+      background-color: #08254f;
+      color: white;
+      text-align: center;
+      padding: 10px 20px;
+    }
+
+    .footer p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .about-section h2 {
+        font-size: 28px;
+      }
+
+      .feature-card h3 {
+        font-size: 18px;
+      }
+
+      .cta h2 {
+        font-size: 24px;
+      }
+
+      .cta button {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <img src="https://imgs.search.brave.com/lhxiBX3d0gSsSf4AZX8ZW32IXK2Ve6nQoobtmHNydLE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2lraWEubm9j/b29raWUubmV0L2xv/Z29wZWRpYS9pbWFn/ZXMvMS8xNi9NYWRo/eWFfUHJhZGVzaF9Q/b2xpY2VfTG9nby5w/bmcvcmV2aXNpb24v/bGF0ZXN0L3NjYWxl/LXRvLXdpZHRoLWRv/d24vMjQwP2NiPTIw/MjAwMzMwMDcxOTU0" alt="FIReBot Logo">
+    <h1 id="header-title">About FIReBot</h1>
+    <p id="header-description">Your Trusted Digital Assistant for Law and Order</p>
+    <div class="wave"></div>
+  </header>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <h2 id="vision-title">Our Vision</h2>
+    <p id="vision-description">
+      At FIReBot, we envision a future where every citizen has seamless access to law enforcement assistance. 
+      Our platform bridges the gap between citizens and justice, ensuring safety and transparency for everyone.
+    </p>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="feature-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3602/3602123.png" alt="Efficiency Icon">
+      <h3 id="efficiency-title">Efficient Processes</h3>
+      <p id="efficiency-description">Filing FIRs and accessing legal resources has never been easier or faster.</p>
+    </div>
+    <div class="feature-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/2917/2917996.png" alt="Secure Icon">
+      <h3 id="security-title">Highly Secure</h3>
+      <p id="security-description">Advanced encryption ensures that your data is always safe with us.</p>
+    </div>
+    <div class="feature-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/1157/1157128.png" alt="User Friendly Icon">
+      <h3 id="user-friendly-title">User-Friendly</h3>
+      <p id="user-friendly-description">Our intuitive interface is designed to make your experience seamless.</p>
+    </div>
+  </section>
+
+  <!-- Call-to-Action Section -->
+  <section class="cta">
+    <h2 id="cta-title">Start With Us In Revolutionizing Justice</h2>
+    <button id="cta-button">
+      <a href="{% url 'home' %}">Let's Start</a>
+    </button>
+
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <p>&copy; 2024 FIReBot | All Rights Reserved</p>
+  </footer>
+
+  <!-- Toggle Language Button -->
+  <button onclick="toggleLanguage()" style="position: fixed; top: 20px; right: 20px; padding: 10px 20px; background-color: #d5deea; color: 08254f; border: none; border-radius: 5px; cursor: pointer;">Switch to Hindi</button>
+
+  <script>
+    let isHindi = false;
+
+    function toggleLanguage() {
+      isHindi = !isHindi;
+
+      // Header Section
+      document.getElementById('header-title').innerText = isHindi ? 'FIReBot के बारे में' : 'About FIReBot';
+      document.getElementById('header-description').innerText = isHindi ? 'कानून और व्यवस्था के लिए आपका विश्वसनीय डिजिटल सहायक' : 'Your Trusted Digital Assistant for Law and Order';
+
+      // About Section
+      document.getElementById('vision-title').innerText = isHindi ? 'हमारा दृष्टिकोण' : 'Our Vision';
+      document.getElementById('vision-description').innerText = isHindi ?
+        'FIReBot में, हम एक ऐसे भविष्य की कल्पना करते हैं जहाँ हर नागरिक को कानून प्रवर्तन सहायता का सहज पहुंच हो। हमारा मंच नागरिकों और न्याय के बीच के अंतर को पाटता है, हर किसी के लिए सुरक्षा और पारदर्शिता सुनिश्चित करता है।' :
+        'At FIReBot, we envision a future where every citizen has seamless access to law enforcement assistance. Our platform bridges the gap between citizens and justice, ensuring safety and transparency for everyone.';
+
+      // Features Section
+      document.getElementById('efficiency-title').innerText = isHindi ? 'प्रभावी प्रक्रियाएँ' : 'Efficient Processes';
+      document.getElementById('efficiency-description').innerText = isHindi ? 'एफआईआर दर्ज करना और कानूनी संसाधनों तक पहुँच अब कभी भी अधिक आसान और तेज़ नहीं हुआ।' : 'Filing FIRs and accessing legal resources has never been easier or faster.';
+
+      document.getElementById('security-title').innerText = isHindi ? 'अत्यधिक सुरक्षित' : 'Highly Secure';
+      document.getElementById('security-description').innerText = isHindi ? 'उन्नत एन्क्रिप्शन यह सुनिश्चित करता है कि आपका डेटा हमेशा हमारे पास सुरक्षित रहे।' : 'Advanced encryption ensures that your data is always safe with us.';
+
+      document.getElementById('user-friendly-title').innerText = isHindi ? 'उपयोगकर्ता के अनुकूल' : 'User-Friendly';
+      document.getElementById('user-friendly-description').innerText = isHindi ? 'हमारा सहज इंटरफ़ेस आपकी अनुभव को निर्बाध बनाने के लिए डिज़ाइन किया गया है।' : 'Our intuitive interface is designed to make your experience seamless.';
+
+      // Call-to-Action Section
+      document.getElementById('cta-title').innerText = isHindi ? 'हमारे साथ न्याय में क्रांति लाने की शुरुआत करें' : 'Start With Us In Revolutionizing Justice';
+      document.getElementById('cta-button').innerText = isHindi ? 'शुरू करें' : 'Let\'s Start';
+    }
+  </script>
+  <a href="{% url 'home' %}">Let's Start</a>
+
+</body>
+</html>

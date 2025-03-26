@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIReBOT</title>
+    
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Faculty+Glyphic&family=Fredoka:wght@300..700&family=Oswald:wght@200..700&display=swap">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: "Oswald", sans-serif;
+            background-color: #004080;
+            transition: background-color 0.3s;
+        }
+
+        /* Main container */
+        .main {
+            display: flex;
+            height: 100vh;
+            transition: transform 0.3s;
+        }
+
+        /* Left Div */
+        .left {
+            width: 20vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .inner-left {
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            height: 100%;
+        }
+
+        .logo img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+
+        .history {
+            border: 2px solid black;
+            height: 50vh;
+            border-radius: 5px;
+            background-color: #e1e1e1;
+            margin-top: 30px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .history h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        /* Right Div */
+        .right {
+            width: 80vw;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            animation: slideInRight 1s ease-out;
+        }
+
+        /* Top Div (Header) */
+        .top {
+            background-color: #e1e1e1;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: fadeInTop 1s ease-out;
+        }
+
+        .top h1 {
+            font-size: 60px;
+            color: #004080;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .language-toggle {
+            background: none;
+            border: none;
+            font-size: 35px;
+            cursor: pointer;
+        }
+
+        /* Bottom Div (Chatbot) */
+        .bottom {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #e1e1e1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            animation: fadeInBottom 1s ease-out;
+        }
+
+        .chat-screen {
+            background-color: rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            border-radius: 10px;
+            height: 100%;
+            border: 1px solid #ddd;
+            color: white;
+            font-size: 16px;
+            max-height: 80%;
+            animation: fadeInChat 1s ease-out;
+        }
+
+        .chatbot-message {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #004080;
+            color: black;
+        }
+
+        .user-message {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #004080;
+            color: white;
+            border-right: 4px solid #e1e1e1;
+        }
+
+        /* Input Area */
+        .input-area {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        textarea {
+            flex-grow: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            resize: none;
+            height: 40px;
+            font-size: 16px;
+            color: white;
+            background-color: #004080;
+        }
+
+        button {
+            margin-left: 10px;
+            padding: 10px;
+            background-color: #004080;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid black;
+            transition: transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.1);
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        /* Optional - make chat messages scroll to the bottom */
+        .chat-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .chat-screen div {
+            display: block;
+        }
+
+        .language-toggle {
+            background: none;
+            border: none;
+            font-size: 17px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .language-toggle:focus {
+            outline: none;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInTop {
+            0% {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInBottom {
+            0% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInChat {
+            0% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            0% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .main {
+                flex-direction: column;
+            }
+
+            .left, .right {
+                width: 100%;
+                height: auto;
+            }
+
+            .top h1 {
+                font-size: 40px;
+            }
+
+            .language-toggle {
+                font-size: 25px;
+            }
+
+            .input-area textarea {
+                font-size: 14px;
+                height: 30px;
+            }
+
+            button {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <!-- Left Div -->
+        <div class="left">
+            <div class="inner-left">
+                <div class="logo">
+                    <img src="https://imgs.search.brave.com/lhxiBX3d0gSsSf4AZX8ZW32IXK2Ve6nQoobtmHNydLE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2lraWEubm9j/b29raWUubmV0L2xv/Z29wZWRpYS9pbWFn/ZXMvMS8xNi9NYWRo/eWFfUHJhZGVzaF9Q/b2xpY2VfTG9nby5w/bmcvcmV2aXNpb24v/bGF0ZXN0L3NjYWxl/LXRvLXdpZHRoLWRv/d24vMjQwP2NiPTIw/MjAwMzMwMDcxOTU0" alt="Logo">
+                </div>
+                <div class="history">
+                    <h2 data-lang="history">History</h2>
+                    <p data-lang="history-description">Your chat history will appear here.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Div -->
+        <div class="right">
+            <!-- Top Header -->
+            <div class="top">
+                <h1>FIReBOT</h1>
+                <button class="language-toggle" onclick="toggleLanguage()">EN</button>
+            </div>
+
+            <!-- Bottom Chat Section -->
+            <div class="bottom">
+                <div class="chat-screen" id="chatScreen"></div>
+
+                <div class="input-area">
+                    <textarea id="userInput" placeholder="Type your message..."></textarea>
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Bot's responses
+        const botResponses = {
+            "hello": "Hi there! How can I help you?",
+            "how are you": "I'm doing well, thank you!",
+            "bye": "Goodbye! Have a great day!"
+        };
+
+        // Current language
+        let isEnglish = true;
+
+        // Function to toggle language
+        function toggleLanguage() {
+            isEnglish = !isEnglish;
+            document.querySelector('.language-toggle').textContent = isEnglish ? 'EN' : 'HI';
+            // Modify text according to language
+            document.querySelector('[data-lang="history"]').textContent = isEnglish ? 'History' : 'इतिहास';
+            document.querySelector('[data-lang="history-description"]').textContent = isEnglish ? 'Your chat history will appear here.' : 'यहाँ आपकी चैट इतिहास दिखाई देगा।';
+        }
+
+        // Function to send message
+        function sendMessage() {
+            const userInput = document.getElementById('userInput').value.trim();
+            if (userInput === "") return;
+
+            // Display user message
+            const userMessageDiv = document.createElement('div');
+            userMessageDiv.classList.add('user-message');
+            userMessageDiv.textContent = userInput;
+            document.getElementById('chatScreen').appendChild(userMessageDiv);
+
+            // Get bot response
+            const botResponse = botResponses[userInput.toLowerCase()] || "Sorry, I didn't understand that.";
+
+            // Display bot response
+            const botMessageDiv = document.createElement('div');
+            botMessageDiv.classList.add('chatbot-message');
+            botMessageDiv.textContent = botResponse;
+            document.getElementById('chatScreen').appendChild(botMessageDiv);
+
+            // Clear input field
+            document.getElementById('userInput').value = "";
+            document.getElementById('chatScreen').scrollTop = document.getElementById('chatScreen').scrollHeight;
+        }
+    </script>
+</body>
+</html>

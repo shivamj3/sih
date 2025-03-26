@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to right, #002c5f, #e7f4fc);
+        }
+
+        /* Container Styling */
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1000px;
+            height: 500px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Left Section */
+        .left-section {
+            background-color: #002c5f;
+            color: white;
+            flex: 0.4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+        }
+
+        .motto {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        /* Right Section */
+        .right-section {
+            flex: 0.6;
+            background-color: #e7f4fc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .right-section h1 {
+            margin-bottom: 20px;
+            color: #002c5f;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+        }
+
+        form input {
+            margin-bottom: 15px;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form button {
+            padding: 12px;
+            font-size: 16px;
+            background-color: #002c5f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #004080;
+        }
+
+        /* Links Styling */
+        .links {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .forgot-password {
+            color: #004080;
+            font-size: 14px;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .register-link {
+            color: #004080;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .forgot-password:hover,
+        .register-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .left-section,
+            .right-section {
+                flex: 1;
+                width: 100%;
+            }
+
+            .logo {
+                width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left-section">
+            <img src="https://imgs.search.brave.com/lhxiBX3d0gSsSf4AZX8ZW32IXK2Ve6nQoobtmHNydLE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2lraWEubm9j/b29raWUubmV0L2xv/Z29wZWRpYS9pbWFn/ZXMvMS8xNi9NYWRo/eWFfUHJhZGVzaF9Q/b2xpY2VfTG9nby5w/bmcvcmV2aXNpb24v/bGF0ZXN0L3NjYWxl/LXRvLXdpZHRoLWRv/d24vMjQwP2NiPTIw/MjAwMzMwMDcxOTU0" alt="Logo" class="logo">
+            <p class="motto">देश भक्ति - जन सेवा</p>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <h1>WELCOME BACK!</h1>
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="username" required>
+                <input type="password" name="password" placeholder="Password" required>
+
+                <button type="submit">Login</button>
+            </form>
+            <div class="links">
+                <a href="#" class="forgot-password">Forgot password?</a>
+                <p>
+                    Don't have an account? <a href="{% url 'signup' %}" class="register-link">Register</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>

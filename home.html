@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Faculty+Glyphic&family=Fredoka:wght@300..700&family=Oswald:wght@200..700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Oswald", serif;
+        }
+        .main-div {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+        }
+        .left-div {
+            height: 100vh;
+            width: 20vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .inner-left-div {
+            height: 90%;
+            width: 90%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            box-sizing: border-box;
+        }
+        .logo-icon {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+        }
+        h3 {
+            margin: 10px 0;
+            font-size: 24px;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+        h5 {
+            margin: 5px 0;
+            font-size: 18px;
+            text-align: center;
+            animation: slideUp 1.5s ease-in-out;
+        }
+        .history {
+            margin: 20px 0;
+            width: 100%;
+            border: 1px solid black;
+            height: 60%;
+            border-radius: 5px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        .history h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-align: center;
+            animation: textGlow 1.5s infinite;
+        }
+        .history-columns p {
+            margin: 5px 0;
+            font-size: 14px;
+            animation: slideIn 1s ease-in-out;
+        }
+        .about-us-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #2a2b5b;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            animation: bounceIn 1.5s ease-in-out;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .about-us-button a{
+            text-decoration: none;
+            color: white;
+        }
+        .about-us-button:hover {
+            background-color: #6a2b5b;
+            transform: scale(1.1);
+        }
+        .right-div {
+            height: 100vh;
+            width: 80vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .inner-right-div {
+            height: 100%;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+        .top-div {
+            height: 10vw;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .welcome-heading {
+            font-size: 60px;
+            text-align: center;
+            animation: zoomIn 1.5s ease-in-out;
+        }
+        .language-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 15px;
+            font-size: 14px;
+            background-color: #2a2b5b;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            animation: fadeIn 2s ease-in-out;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .language-button:hover {
+            background-color: #6a2b5b;
+            transform: scale(1.1);
+        }
+        .bottom-div {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .inner-bottom-div {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        .large-box a{
+            text-decoration: none;
+            color: white;
+        }
+        .small-divs {
+            display: grid;
+            grid-template-columns: repeat(2, 20vw);
+            grid-template-rows: repeat(2, 25vh);
+            gap: 20px;
+            margin-left: 15px;
+        }
+        .box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid black;
+            border-radius: 10px;
+            box-sizing: border-box;
+            padding: 10px;
+            text-align: center;
+            animation: slideIn 1.5s ease-in-out;
+        }
+        .box-heading {
+            font-size: 23px;
+            margin-bottom: 10px;
+            font-weight: 500;
+            width: 100%;
+            border-radius: 5px;
+            color: white;
+            background-color: #2a2b5b;
+        }
+        .box-heading a{
+            text-decoration: none;
+            color: white;
+        }
+        .box-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .box-image img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .large-box {
+            height: 53vh;
+            width: 30vw;
+            display: flex;
+            flex-direction: column;
+            margin-right: 25px;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid black;
+            border-radius: 10px;
+            box-sizing: border-box;
+            padding: 20px;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .large-box-heading {
+            font-size: 25px;
+            width: 100%;
+            background-color: #2a2b5b;
+            margin-bottom: 10px;
+            color: white;
+            border-radius: 5px;
+            font-weight: 500;
+            object-fit: cover;
+        }
+        .large-box-image img{
+            width: 100%;
+            height: 90%;
+            object-fit: cover;
+        }
+        #image img{
+            width: 250px;
+            height: 150px;
+            object-fit: cover;
+        }
+        #image2 img{
+            height: 90%;
+        }
+        #image3 img{
+            width: 250px;
+            height: 150px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @keyframes slideUp {
+            0% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes textGlow {
+            0% {
+                text-shadow: 0 0 5px #ffffff, 0 0 10px #6a2b5b, 0 0 20px #6a2b5b;
+            }
+            100% {
+                text-shadow: 0 0 10px #ffffff, 0 0 15px #2a2b5b, 0 0 30px #2a2b5b;
+            }
+        }
+        @keyframes zoomIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+    <div class="main-div">
+        <div class="left-div">
+            <div class="inner-left-div">
+                <div class="logo">
+                    <img src="https://imgs.search.brave.com/lhxiBX3d0gSsSf4AZX8ZW32IXK2Ve6nQoobtmHNydLE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2lraWEubm9j/b29raWUubmV0L2xv/Z29wZWRpYS9pbWFn/ZXMvMS8xNi9NYWRo/eWFfUHJhZGVzaF9Q/b2xpY2VfTG9nby5w/bmcvcmV2aXNpb24v/bGF0ZXN0L3NjYWxl/LXRvLXdpZHRoLWRv/d24vMjQwP2NiPTIw/MjAwMzMwMDcxOTU0" alt="Logo" class="logo-icon">
+                </div>
+                <h3>HELLO</h3>
+                <h5>USER!</h5>
+                <div class="history">
+                    <h4>HISTORY</h4>
+                    <div class="history-columns">
+                        <p>History Column 1</p>
+                        <p>History Column 2</p>
+                        <p>History Column 3</p>
+                    </div>
+                </div>
+                <button class="about-us-button"><a href="{% url 'aboutus' %}">About Us</a></button>
+
+
+            </div>
+        </div>
+        <div class="right-div">
+            <div class="inner-right-div">
+                <div class="top-div">
+                    <h1 class="welcome-heading">WELCOME TO FIReBOT</h1>
+                    <button class="language-button">Hindi</button>
+                </div>
+                <div class="bottom-div">
+                    <div class="inner-bottom-div">
+                        <div class="small-divs">
+                            <div class="box">
+                                <div class="box-heading"><a href="{% url 'judgement'%}">PREVIOUS CASES</a></div>
+                                
+                                <div class="box-image" id="image2">
+                                    <img src= "https://res.cloudinary.com/dqgw1wo8j/image/upload/v1733646033/ub41ggcfkyzmznw33e3l.png" alt="Box 1 Image">
+                                </div>
+                            </div>
+                            <div class="box">
+                                <div class="box-heading"><a href="{% url 'query'%}">ANY QUERY</a></div>
+                                
+                                <div class="box-image" id="image">
+                                    <img src="https://res.cloudinary.com/dqgw1wo8j/image/upload/v1733937914/akg2ynjpxt6quiswm1lw.jpg
+
+                                    " alt="Box 2 Image">
+                                </div>
+                            </div>
+                            <div class="box" id="image3">
+                                <div class="box-heading"><a href="{% url 'investigation'%}">INVESTIGATION HELP</a></div>
+                                
+                                <div class="box-image">
+                                    <img src="https://res.cloudinary.com/dqgw1wo8j/image/upload/v1733743920/u7ciah2szohu3kdgpcw1.png" alt="Box 3 Image">
+                                </div>
+                            </div>
+                            <div class="box">
+                                <div class="box-heading"><a href="{% url 'crime_report'%}">CRIME ANALYSIS</a></div>
+                                
+                                <div class="box-image" id="image">
+                                    <img src="https://res.cloudinary.com/dqgw1wo8j/image/upload/v1733743916/gpimtr1esafohngebtps.png" alt="Box 4 Image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="large-box">
+                            <div class="large-box-heading"><a href="{% url 'icons'%}">HELP FILING FIR?</a></div>
+                            
+                            <div class="large-box-image">
+                                <img src="https://res.cloudinary.com/dqgw1wo8j/image/upload/v1733932385/om4d08a1dw3vfonkjazc.webp" alt="Large Box Image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

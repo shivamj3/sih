@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIReBOT Input Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Roboto+Slab:wght@400;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        body {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            background: linear-gradient(to top right, #08254f, #fdf7e3);
+            overflow: hidden;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .main-div {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+        .left-div {
+            width: 30vw;
+            background-color: #08254f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: slideInLeft 1.5s ease-out;
+        }
+        .left-div img {
+            width: 70%;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .right-div {
+            flex: 1;
+            background-color: #fdf7e3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: slideInRight 1.5s ease-out;
+        }
+        .header-div h1 {
+            font-size: 4rem;
+            font-family: "Roboto Slab", serif;
+            color: #08254f;
+            animation: bounceIn 1.5s ease-out;
+        }
+        .bottom-div {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .bottom-div label {
+            display: block;
+            margin-bottom: 15px;
+            font-size: 2rem;
+            color: #333;
+        }
+        .input-container {
+            position: relative;
+            width: 90%;
+            animation: zoomIn 1.5s ease-out;
+        }
+        .bottom-div input {
+            width: 100%;
+            padding: 25px 80px 25px 30px;
+            font-size: 1.6rem;
+            border: 2px solid #ccc;
+            border-radius: 50px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .bottom-div input:focus {
+            outline: none;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transform: scale(1.03);
+        }
+        .input-container button {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #08254f;
+            color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+        .input-container button:hover {
+            transform: scale(1.2);
+            background-color: #061d3b;
+        }
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes bounceIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-div">
+        <div class="left-div">
+            <img src="https://imgs.search.brave.com/lhxiBX3d0gSsSf4AZX8ZW32IXK2Ve6nQoobtmHNydLE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2lraWEubm9j/b29raWUubmV0L2xv/Z29wZWRpYS9pbWFn/ZXMvMS8xNi9NYWRo/eWFfUHJhZGVzaF9Q/b2xpY2VfTG9nby5w/bmcvcmV2aXNpb24v/bGF0ZXN0L3NjYWxl/LXRvLXdpZHRoLWRv/d24vMjQwP2NiPTIw/MjAwMzMwMDcxOTU0" alt="Icon">
+        </div>
+        <div class="right-div">
+            <div class="header-div">
+                <h1>FIReBOT</h1>
+            </div>
+            <div class="bottom-div">
+                <label for="crime-details">Enter Crime Details</label>
+                <div class="input-container">
+                    <form method="GET" action="{% url 'result_page' %}">
+                        <input type="text" name="query" id="crime-details" placeholder="Type here...">
+                        <button type="submit" id="submit-btn">🔍</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

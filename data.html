@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search BNS Cases</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Cases by BNS Section</h1>
+    <input type="text" id="sectionInput" placeholder="Enter BNS Section">
+    <button onclick="searchCases()">Search Cases</button>
+    <div id="result"></div>
+
+    <script>
+        function searchCases() {
+            const section = document.getElementById('sectionInput').value;
+
+            if (section) {
+                fetch(`/data/data/?section=${section}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            let casesHtml = '<h2>Results:</h2><ul>';
+                            data.cases.forEach(caseItem => {
+                                casesHtml += `
+                                    <li>
+                                        Case 1: ${caseItem['case 1']}<br>
+                                        Case 2: ${caseItem['case 2']}<br>
+                                        Case 3: ${caseItem['case 3']}<br>
+                                        Case 4: ${caseItem['case 4']}<br>
+                                        Case 5: ${caseItem['case 5']}
+                                    </li>`;
+                            });
+                            casesHtml += '</ul>';
+                            document.getElementById('result').innerHTML = casesHtml;
+                        } else {
+                            document.getElementById('result').innerHTML = `<p>${data.message}</p>`;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        document.getElementById('result').innerHTML = '<p>An error occurred while fetching data.</p>';
+                    });
+            } else {
+                document.getElementById('result').innerHTML = '<p>Please enter a section name.</p>';
+            }
+        }
+    </script>
+</body>
+</html>

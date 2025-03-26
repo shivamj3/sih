@@ -1,0 +1,381 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FireBOT Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Oswald", sans-serif;
+        }
+
+        .main {
+            height: 100vh;
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+        }
+
+        .left-div {
+            flex: 1;
+            background-color: rgba(8, 37, 79, 1);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            animation: fadeInLeft 1s ease-in-out;
+        }
+
+        .icon img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            animation: bounceIn 1.5s ease-in-out;
+        }
+
+        .history {
+            text-align: center;
+            margin-top: 20px;
+            width: 90%;
+            height: 50%;
+            border: 2px solid white;
+            border-radius: 10px;
+            padding: 10px;
+            animation: zoomIn 1.5s ease-in-out;
+        }
+
+        .history h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .right-div {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            animation: fadeInRight 1s ease-in-out;
+        }
+
+        .top-div {
+            background-color: rgba(254, 255, 239, 1);
+            color: black;
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            padding: 20px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        .top-div span {
+            color: rgba(8, 37, 79, 1);
+            text-shadow: 2px 2px 4px #aaa;
+        }
+
+        .bottom-div {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            background-color: rgba(254, 255, 239, 1);
+        }
+
+        .chat-area {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            animation: fadeInUp 1.5s ease-in-out;
+            position: relative;
+        }
+
+        .placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            color: #aaa;
+            text-align: center;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            animation: zoomIn 1.5s ease-in-out;
+        }
+
+        #userInput {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 1rem;
+            background-color: rgba(8, 37, 79, 1);
+            color: white;
+        }
+
+        #sendButton {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: rgba(8, 37, 79, 1);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #sendButton:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes fadeInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounceIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main {
+                flex-direction: column;
+            }
+
+            .left-div {
+                width: 100%;
+                flex-direction: row;
+                justify-content: center;
+                padding: 10px;
+            }
+
+            .right-div {
+                flex: 1;
+            }
+
+            .icon img {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="left-div">
+            <div class="icon">
+                <img src="https://imgs.search.brave.com/lhxiBX3d0gSsSf4AZX8ZW32IXK2Ve6nQoobtmHNydLE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2lraWEubm9j/b29raWUubmV0L2xv/Z29wZWRpYS9pbWFn/ZXMvMS8xNi9NYWRo/eWFfUHJhZGVzaF9Q/b2xpY2VfTG9nby5w/bmcvcmV2aXNpb24v/bGF0ZXN0L3NjYWxl/LXRvLXdpZHRoLWRv/d24vMjQwP2NiPTIw/MjAwMzMwMDcxOTU0" alt="Header Icon">
+            </div>
+            <div class="history">
+                <h2>HISTORY</h2>
+                <div class="history-columns">
+                    <p>No history available.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-div">
+            <div class="top-div">
+                <span>FIReBOT</span>
+            </div>
+            <div class="bottom-div">
+                <div class="chat-area">
+                    <div class="messages">
+                        <div id="placeholderText" class="placeholder">Have a Query? Let's Solve It Together!</div>
+                    </div>
+                </div>
+                <div class="input-area">
+                    <input type="text" id="userInput" placeholder="Type your query here..." />
+                    <button id="sendButton">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+       document.getElementById('sendButton').addEventListener('click', sendMessage);
+document.getElementById('userInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        sendMessage();
+    }
+});
+
+// Predefined responses with more details and behavioral sections (BNS)
+const predefinedResponses = {
+    "gang rape": {
+        problem: "Gang rape is a horrific form of sexual assault involving multiple perpetrators. This act causes severe physical trauma, emotional suffering, and psychological scars. Victims often face long-lasting trauma, including PTSD, anxiety, and depression.",
+        bns: {
+            physical: "Victims may experience severe physical injuries, sexually transmitted infections (STIs), and long-term health complications.",
+            psychological: "Victims often struggle with anxiety, depression, PTSD, and feelings of shame and helplessness. Mental health support is critical.",
+            legal: "Gang rape is a criminal offense with severe legal consequences, including long prison sentences for the perpetrators. Victims should report the crime immediately to ensure justice."
+        },
+        solution: "It is crucial to report the incident to law enforcement for immediate action. Seek medical attention to treat injuries and prevent STIs. Psychological counseling is important to address the mental health impacts of the trauma."
+    },
+    "murder": {
+        problem: "Murder is the unlawful killing of a person, often causing immense grief to the victim's family and community. It is a highly traumatic event that can lead to legal consequences, both for the perpetrator and the society as a whole.",
+        bns: {
+            emotional: "The emotional toll on the victim's family and loved ones is devastating, often resulting in grief, anger, and long-term emotional distress.",
+            legal: "Murder is one of the most serious crimes and is punished severely by law, including life imprisonment or the death penalty in some jurisdictions.",
+            preventive: "Preventive measures can include education about conflict resolution, anger management programs, and improved social support to reduce violent behavior."
+        },
+        solution: "If you witness or suspect a murder, contact emergency services immediately. Victims' families should seek counseling for grief management and community support to deal with the emotional impact."
+    },
+    "stalking": {
+        problem: "Stalking is a crime where the perpetrator continuously harasses or intimidates the victim, often causing feelings of fear and vulnerability. It can escalate to physical harm if not addressed.",
+        bns: {
+            emotional: "Stalking victims often experience heightened anxiety, paranoia, and a constant sense of danger.",
+            safety: "If not reported, stalking can escalate into physical violence or even murder in extreme cases. Victims must prioritize safety.",
+            legal: "Most regions have anti-stalking laws that allow victims to obtain restraining orders and press charges against the perpetrator."
+        },
+        solution: "Victims of stalking should immediately contact law enforcement, document all incidents, and seek legal protection through restraining orders. Support from counseling services can help manage emotional distress."
+    },
+    "suicide": {
+        problem: "Suicide is the intentional taking of one's life, often caused by severe mental health issues like depression, anxiety, or trauma. It is a devastating event for the victim’s loved ones and the community.",
+        bns: {
+            mentalHealth: "Untreated mental health conditions such as depression, anxiety, and PTSD often lead to suicidal ideation.",
+            isolation: "Social isolation or the lack of emotional support can contribute to suicidal thoughts and feelings.",
+            preventive: "Suicide prevention programs, mental health support, and creating strong social connections can help prevent suicides."
+        },
+        solution: "If you or someone you know is thinking about suicide, contact a mental health professional immediately. There are 24/7 suicide prevention hotlines and counseling services available."
+    },
+    "snatching": {
+        problem: "Snatching is a form of robbery that involves forcibly taking someone's personal belongings, often in public spaces. This crime can result in physical injuries and emotional distress for the victim.",
+        bns: {
+            physical: "Snatching can cause physical harm, such as bruises, sprains, or broken bones if the victim resists.",
+            emotional: "Victims may feel violated, unsafe, and fearful of going out in public after an incident of snatching.",
+            legal: "It is important to report snatching to the authorities immediately to aid in identifying the perpetrator. Surveillance footage and eyewitness accounts can be critical."
+        },
+        solution: "If you are a victim of snatching, report the crime to the police immediately. Try to remember as many details as possible about the thief and the incident. Always stay alert in public spaces to protect yourself."
+    },
+    // Add more cases similarly...
+
+};
+
+// Function to handle sending messages
+function sendMessage() {
+    const input = document.getElementById('userInput');
+    const messagesDiv = document.querySelector('.messages');
+    const placeholder = document.getElementById('placeholderText');
+
+    // Remove placeholder text when a message is sent
+    if (placeholder) {
+        placeholder.remove();
+    }
+
+    const userMessage = input.value.trim();
+    if (userMessage === '') {
+        alert('Please type a message.');
+        return;
+    }
+
+    // Create a user message bubble
+    const userMessageBubble = document.createElement('div');
+    userMessageBubble.classList.add('user-message');
+    userMessageBubble.textContent = userMessage;
+    messagesDiv.appendChild(userMessageBubble);
+
+    input.value = ''; // Clear input field
+
+    // Check the input for predefined topics
+    const lowerCaseInput = userMessage.toLowerCase();
+    let botResponse = "Sorry, I couldn't understand your query. Could you please clarify?";
+
+    // Loop through the predefined responses and check if any keyword matches
+    for (const topic in predefinedResponses) {
+        if (lowerCaseInput.includes(topic)) {
+            const { problem, bns, solution } = predefinedResponses[topic];
+            botResponse = `
+                <strong>Problem:</strong> ${problem} <br><br>
+                <strong>BNS (Behavioral Need Sections):</strong><br>
+                <strong>Physical Impact:</strong> ${bns.physical || 'N/A'} <br>
+                <strong>Psychological Impact:</strong> ${bns.psychological || 'N/A'} <br>
+                <strong>Safety & Legal Action:</strong> ${bns.legal || 'N/A'} <br><br>
+                <strong>Suggested Actions:</strong> ${solution}`;
+            break;
+        }
+    }
+
+    // Create the bot response bubble
+    const botMessageBubble = document.createElement('div');
+    botMessageBubble.classList.add('bot-message');
+    botMessageBubble.innerHTML = botResponse;
+    messagesDiv.appendChild(botMessageBubble);
+
+    // Scroll to the bottom
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+    </script>
+</body>
+</html>
